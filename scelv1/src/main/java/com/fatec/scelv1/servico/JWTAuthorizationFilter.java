@@ -15,7 +15,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-
+/*
+ * Este filtro verificará a existência e validade do token de acesso no cabeçalho de autorização.
+ * Os endpoints que estarão sujeitos a esse filtro sao especificados na classe configuracao web do Spring Boot
+ */
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 	private JWTUtil jwtUtil;
 
@@ -28,7 +31,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 		this.jwtUtil = jwtUtil;
 		this.userDetailsService = userDetailsService;
 	}
-
+/*
+ * O método doFilterInternal intercepta as solicitações e verifica o cabeçalho de autorização. 
+ * Se o cabeçalho não estiver presente ou não começar com “BEARER”, ele segue para a cadeia de filtros.
+ * Se o cabeçalho estiver presente, o método getAuthentication é chamado e verifica, 
+ * se o token é válido, ele retorna um token de acesso que Spring usará internamente.
+ */
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
