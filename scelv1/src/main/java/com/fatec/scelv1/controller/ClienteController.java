@@ -44,7 +44,9 @@ public class ClienteController {
 		return servico.consultaTodos();
 
 	}
-
+    /*
+     * id incluido no endpoit para retirar a ambiguidade para dois metodos get
+     */
 	@GetMapping(path = { "/v1/clientes/id/{id}" })
 	public ResponseEntity<Cliente> findById(@PathVariable long id) {
 		logger.info(">>>>>> 1. controller chamou servico consulta por id");

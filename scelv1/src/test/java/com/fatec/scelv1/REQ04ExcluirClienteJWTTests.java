@@ -23,7 +23,7 @@ class REQ04ExcluirClienteJWTTests {
 	private TestRestTemplate testRestTemplate;
    
     @Test
-    public void ct01_givenAuthRequestOnPrivateService_shouldSucceedWith200() throws Exception {
+    public void ct01_dado_que_o_cliente_existe_na_consulta_retorna_cliente() throws Exception {
     	//cadastra usuario
     	ApplicationUser user = new ApplicationUser();
     	user.setUsername("jose");
@@ -40,7 +40,7 @@ class REQ04ExcluirClienteJWTTests {
     	HttpEntity<?> httpEntity2 = new HttpEntity<>(headers);
     	
     	//consulta o servico enviando o token de autenticacao no header
-    	ResponseEntity<Cliente> resposta3 = testRestTemplate.exchange("/api/clientes/v1/consulta_id/{id}", HttpMethod.GET, httpEntity2,Cliente.class,9);
+    	ResponseEntity<Cliente> resposta3 = testRestTemplate.exchange("/api/v1/clientes/id/{id}", HttpMethod.GET, httpEntity2,Cliente.class,9);
     	Cliente umCliente = resposta3.getBody();
     	assertEquals ("Jose9", umCliente.getNome());
     	//assertTrue(resposta.getHeaders().getContentType().equals(MediaType.APPLICATION_JSON));
